@@ -1,0 +1,10 @@
+package com.galaxy.registry.model;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table("company_details")
+public class companyRegistry {
+
+}

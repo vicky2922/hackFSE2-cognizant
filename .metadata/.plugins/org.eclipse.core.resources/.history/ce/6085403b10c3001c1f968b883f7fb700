@@ -1,0 +1,13 @@
+package com.galaxy.stock.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.galaxy.stock.repos.StockDataRepo;
+
+@Service
+public class StockDataService {
+	
+	@Autowired
+	StockDataRepo stockDataRepo;
+}

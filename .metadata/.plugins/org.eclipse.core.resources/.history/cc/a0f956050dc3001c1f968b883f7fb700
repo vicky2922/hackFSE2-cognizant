@@ -1,0 +1,6 @@
+package com.galaxy.stock.service;
+
+@Service
+public class StockDataService {
+
+}

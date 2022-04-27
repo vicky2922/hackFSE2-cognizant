@@ -1,0 +1,30 @@
+package com.galaxy.registry.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.galaxy.registry.model.CompanyRegistry;
+import com.galaxy.registry.service.CompanyRegistryService;
+
+@RestController
+@RequestMapping("/companies")
+public class CompanyRegistryController {
+	
+	@Autowired
+	CompanyRegistryService companyRegistryService;
+		
+	@GetMapping("/greetings")
+	public String greetings() {
+		return "Welcome to company-registry micro-service";
+	}
+	
+	@PostMapping("/register")
+	public String registerCompany(@RequestBody CompanyRegistry companyRegistryRequest) {
+		long companyId = companyRegistryService.saveCompany(companyRegistryRequest);
+		return "company \""+ companyRegistryRequest.getCompanyName()+"\" got registered with id - "+companyId;
+	}
+}

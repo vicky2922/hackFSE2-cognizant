@@ -1,0 +1,9 @@
+package com.galaxy.registry.repos;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.galaxy.registry.model.CompanyRegistry;
+
+public interface CompanyRegistryRepo extends JpaRepository<CompanyRegistry, Long>{
+
+}

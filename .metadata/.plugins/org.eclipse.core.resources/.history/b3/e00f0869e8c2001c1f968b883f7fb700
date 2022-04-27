@@ -1,0 +1,9 @@
+package com.galaxy.registry.request;
+
+public class CompanyRegistryRequest {
+	private String companyCode;
+	private String companyName;
+	private String companyCeo;
+	private long companyTurnover;
+	private String stockExchange;
+}

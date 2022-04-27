@@ -1,0 +1,27 @@
+package com.galaxy.stock.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.galaxy.stock.model.StockData;
+import com.galaxy.stock.service.StockDataService;
+
+@RestController
+@RequestMapping("/stock")
+public class StockDataController {
+
+	@Autowired
+	StockDataService stockDataService;
+	
+	@PostMapping("/add/{companyCode}/{stockPrice}")
+	public StockData saveStockPrice(@PathVariable String companyCode, @PathVariable double stockPrice) {
+		StockData stockData = new StockData();
+		stockData.setCompanyCode(companyCode);
+		stockData.setStockPrice(12000.0);
+		
+		return stockDataService.saveStockPrice();
+	}
+}

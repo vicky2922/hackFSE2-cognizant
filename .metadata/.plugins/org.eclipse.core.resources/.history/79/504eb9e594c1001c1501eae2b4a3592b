@@ -1,0 +1,6 @@
+package com.galaxy.registry.service;
+
+@Service
+public class CompanyRegistryService {
+
+}

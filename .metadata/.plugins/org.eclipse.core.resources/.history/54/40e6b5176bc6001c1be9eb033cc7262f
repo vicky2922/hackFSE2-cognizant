@@ -1,0 +1,22 @@
+package com.galaxy.stock.repos;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Collection;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import com.galaxy.stock.model.StockData;
+
+@Repository
+public interface StockDataRepo extends JpaRepository<StockData, Long> {
+
+	
+	@Query(value="SELECT s.* FROM stock_data s WHERE s.companyCode = :companyCode AND DATE(s.currentDatAndTime) = :startDate", nativeQuery = true)
+	Collection<StockData> findByCodeAndDate(String companyCode, LocalDate startDate);
+	
+	Collection<StockData> findByCompanyCode(String companyCode);
+	
+}

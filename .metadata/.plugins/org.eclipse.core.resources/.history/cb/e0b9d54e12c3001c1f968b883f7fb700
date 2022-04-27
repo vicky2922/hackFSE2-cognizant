@@ -1,0 +1,28 @@
+package com.galaxy.stock.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import com.galaxy.stock.model.StockData;
+import com.galaxy.stock.repos.StockDataRepo;
+
+@Service
+public class StockDataService {
+	
+	@Autowired
+	StockDataRepo stockDataRepo;
+
+	public StockData saveStockPrice(String companyCode, double stockPrice) {
+		StockData stockData = new StockData();
+		stockData.setCompanyCode(companyCode);
+		stockData.setStockPrice(stockPrice);
+		return stockDataRepo.save(stockData);
+	}
+
+	public List<StockData> fetchStockData(String companyCode, String startDate, String endDate) {
+		return null;
+	}
+}

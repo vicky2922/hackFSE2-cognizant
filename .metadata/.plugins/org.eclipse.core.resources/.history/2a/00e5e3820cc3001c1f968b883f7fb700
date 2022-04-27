@@ -1,0 +1,5 @@
+package com.galaxy.stock.repos;
+
+public class StockDataRepo {
+
+}

@@ -1,0 +1,9 @@
+
+
+spring.cloud.gateway.routes[0].id=companyregistry
+spring.cloud.gateway.routes[0].uri=lb://company-registry/
+#spring.cloud.gateway.routes[0].uri=http://localhost:9090/
+spring.cloud.gateway.routes[0].predicates[0]=Path=/api/**
+
+
+eureka.client.serviceUrl.defaultZone= ${EUREKA_URI:http://localhost:8761/eureka}
