@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.galaxy.registry.Exception.CompanyCodeAlreadyExistException;
+import com.galaxy.registry.Exception.CompanyTurnoverException;
 import com.galaxy.registry.model.CompanyRegistry;
 import com.galaxy.registry.service.CompanyRegistryService;
 
@@ -31,6 +33,13 @@ public class CompanyRegistryController {
 	
 	@PostMapping("/register")
 	public String registerCompany(@RequestBody CompanyRegistry companyRegistryRequest) {
+		if(companyRegistryRequest.getCompanyTurnover()<10) {
+			throw new CompanyTurnoverException();
+		}
+		CompanyRegistry companyExist = companyRegistryService.getCompanyDetailByCompanyCode(companyRegistryRequest.getCompanyCode());
+		if(null!=companyExist) {
+			throw new CompanyCodeAlreadyExistException();
+		}
 		long companyId = companyRegistryService.saveCompany(companyRegistryRequest);
 		return "company \""+ companyRegistryRequest.getCompanyName()+"\" got registered with id - "+companyId;
 	}

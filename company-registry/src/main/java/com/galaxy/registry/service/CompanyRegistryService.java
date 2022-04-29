@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.galaxy.registry.Exception.CompanyCodeAlreadyExistException;
 import com.galaxy.registry.model.CompanyRegistry;
 import com.galaxy.registry.repos.CompanyRegistryRepo;
 
@@ -17,7 +18,8 @@ public class CompanyRegistryService {
 	@Autowired
 	private CompanyRegistryRepo companyRegistryRepo;
 
-	public Long saveCompany(CompanyRegistry companyRegistryRequest) {
+	public Long saveCompany(CompanyRegistry companyRegistryRequest) throws CompanyCodeAlreadyExistException {
+		
 		return companyRegistryRepo.save(companyRegistryRequest).getId();
 	}
 
