@@ -1,0 +1,5 @@
+package com.galaxy.stock.client;
+
+public class RestClient {
+
+}

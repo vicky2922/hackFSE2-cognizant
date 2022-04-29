@@ -3,13 +3,16 @@ package com.galaxy.stock.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.galaxy.stock.client.RestClient;
 import com.galaxy.stock.model.StockData;
+import com.galaxy.stock.pojo.CompanyData;
 import com.galaxy.stock.service.StockDataService;
 
 @RestController
@@ -19,6 +22,9 @@ public class StockDataController {
 	@Autowired
 	StockDataService stockDataService;
 	
+	@Autowired
+	RestClient client;
+	
 	@GetMapping("/greetings")
 	public String greetings() {
 		return "Welcome to stock-price micro-service";
@@ -26,11 +32,21 @@ public class StockDataController {
 	
 	@PostMapping("/add/{companyCode}/{stockPrice}")
 	public StockData saveStockPrice(@PathVariable String companyCode, @PathVariable double stockPrice) {
-		return stockDataService.saveStockPrice(companyCode, stockPrice);
+		CompanyData companyData = client.getCompany(companyCode);
+		StockData stockData = null;
+		if(null!=companyData) {
+			stockData = stockDataService.saveStockPrice(companyCode, stockPrice);
+		}
+		return stockData;
 	}
 	
 	@GetMapping("/get/{companyCode}/{startDate}/{endDate}")
 	public List<StockData> fetchStockData(@PathVariable String companyCode, @PathVariable String startDate, @PathVariable String endDate){
 		return stockDataService.fetchStockData(companyCode, startDate, endDate);
+	}
+	
+	@DeleteMapping("/delete/{companyCode}")
+	public void deleteStockData(@PathVariable String companyCode) {
+		stockDataService.deleteStockDataByCompanyCode(companyCode);
 	}
 }

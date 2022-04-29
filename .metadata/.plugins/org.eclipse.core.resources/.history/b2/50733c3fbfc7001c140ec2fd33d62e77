@@ -1,0 +1,6 @@
+package com.galaxy.stock.pojo;
+
+public class CompanyData {
+	private String companyCode;
+	private String companyName;
+}

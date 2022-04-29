@@ -1,0 +1,15 @@
+package com.galaxy.stock.client;
+
+import java.util.List;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.galaxy.stock.pojo.CompanyData;
+
+@FeignClient(value="company-client", url="http://localhost:8989/company/")
+public interface RestClient {
+
+	@GetMapping("/info/{companyCode}")
+	List<CompanyData> getCompany();
+}

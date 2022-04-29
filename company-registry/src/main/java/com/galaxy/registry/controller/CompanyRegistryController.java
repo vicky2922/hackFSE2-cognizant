@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.galaxy.registry.Exception.CompanyCodeAlreadyExistException;
 import com.galaxy.registry.Exception.CompanyTurnoverException;
+import com.galaxy.registry.client.RestClient;
 import com.galaxy.registry.model.CompanyRegistry;
 import com.galaxy.registry.service.CompanyRegistryService;
 
@@ -25,6 +26,9 @@ public class CompanyRegistryController {
 	
 	@Autowired
 	CompanyRegistryService companyRegistryService;
+	
+	@Autowired
+	RestClient client;
 		
 	@GetMapping("/greetings")
 	public String greetings() {
@@ -56,6 +60,7 @@ public class CompanyRegistryController {
 	
 	@DeleteMapping("/delete/{companyCode}")
 	public String deleteCompany(@PathVariable String companyCode) {
+		client.deleteStockData(companyCode);
 		companyRegistryService.deleteCompany(companyCode);
 		return "Company deleted with company code \""+companyCode+"\".";
 	}

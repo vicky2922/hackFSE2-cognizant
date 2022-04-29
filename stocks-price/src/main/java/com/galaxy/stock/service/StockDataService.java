@@ -34,4 +34,8 @@ public class StockDataService {
 		returnList.addAll(stockData);
 		return returnList;
 	}
+
+	public void deleteStockDataByCompanyCode(String companyCode) {
+		stockDataRepo.deleteByCompanyCode(companyCode);
+	}
 }
