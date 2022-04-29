@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.galaxy.stock.Exception.CompanyNotFoundException;
 import com.galaxy.stock.client.RestClient;
 import com.galaxy.stock.model.StockData;
-import com.galaxy.stock.pojo.CompanyData;
 import com.galaxy.stock.service.StockDataService;
 
 @RestController
@@ -32,16 +32,21 @@ public class StockDataController {
 	
 	@PostMapping("/add/{companyCode}/{stockPrice}")
 	public StockData saveStockPrice(@PathVariable String companyCode, @PathVariable double stockPrice) {
-		CompanyData companyData = client.getCompany(companyCode);
-		StockData stockData = null;
-		if(null!=companyData) {
-			stockData = stockDataService.saveStockPrice(companyCode, stockPrice);
+		try {
+			client.getCompany(companyCode);
+		} catch (Exception e) {
+			throw new CompanyNotFoundException();
 		}
-		return stockData;
+		return stockDataService.saveStockPrice(companyCode, stockPrice);
 	}
 	
 	@GetMapping("/get/{companyCode}/{startDate}/{endDate}")
 	public List<StockData> fetchStockData(@PathVariable String companyCode, @PathVariable String startDate, @PathVariable String endDate){
+		try {
+			client.getCompany(companyCode);
+		} catch (Exception e) {
+			throw new CompanyNotFoundException();
+		}
 		return stockDataService.fetchStockData(companyCode, startDate, endDate);
 	}
 	

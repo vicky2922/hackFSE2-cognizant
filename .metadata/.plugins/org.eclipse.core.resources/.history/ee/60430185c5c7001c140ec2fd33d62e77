@@ -1,0 +1,5 @@
+package com.galaxy.registry.Exception;
+
+public class CompanyNotFoundException extends RuntimeException {
+
+}
