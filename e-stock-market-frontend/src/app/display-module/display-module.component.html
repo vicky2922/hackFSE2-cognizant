@@ -1,1 +1,12 @@
-<p>display-module works!</p>
+<p>display works!</p>
+{{ childMessage }}
+
+<table>
+    <ng-container *ngFor="let data of childMessage">
+        <tr>
+            <td>
+                <h2>{{data}}</h2>
+            </td>
+        </tr>
+    </ng-container>
+</table>

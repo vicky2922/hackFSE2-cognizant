@@ -27,7 +27,7 @@ public class StockDataService {
 
 	public List<StockData> fetchStockData(String companyCode, String startDate, String endDate) {
 		List<StockData> returnList = new ArrayList<>();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDate startDateObj = LocalDate.parse(startDate, formatter);
 		LocalDate endDateObj = LocalDate.parse(endDate, formatter);
 		Collection<StockData> stockData = stockDataRepo.findByCodeAndDate(companyCode, startDateObj, endDateObj);

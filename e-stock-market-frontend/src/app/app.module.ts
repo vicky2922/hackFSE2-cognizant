@@ -3,8 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http'
 import { SearchModuleComponent } from './search-module/search-module.component';
 import { DisplayModuleComponent } from './display-module/display-module.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';  
+import { RestServiceService } from './rest-service.service';
 
 @NgModule({
   declarations: [
@@ -14,9 +17,12 @@ import { DisplayModuleComponent } from './display-module/display-module.componen
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    FormsModule,  
+    ReactiveFormsModule,
+    AppRoutingModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [RestServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

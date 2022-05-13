@@ -1,3 +1,7 @@
 <h1 style="text-align: center;"> E STOCK MARKET </h1>
-<app-search-module></app-search-module>
-<app-display-module></app-display-module>
+
+<!-- Message: {{searchData}}
+Date : {{startDate}} -->
+<hr>
+<app-search-module (messageEvent)="receiveMsg($event)"></app-search-module>
+<app-display-module [childMessage]="stockDataList"></app-display-module>

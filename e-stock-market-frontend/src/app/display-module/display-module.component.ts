@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-display-module',
@@ -7,9 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DisplayModuleComponent implements OnInit {
 
-  constructor() { }
+  @Input() childMessage: any[] | undefined;
 
+  constructor() { }
   ngOnInit(): void {
   }
-
 }
