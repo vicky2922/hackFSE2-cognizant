@@ -38,4 +38,17 @@ public class StockDataService {
 	public void deleteStockDataByCompanyCode(String companyCode) {
 		stockDataRepo.deleteByCompanyCode(companyCode);
 	}
+
+	public double getAvgPrice(List<StockData> stockDataList) {
+		double avg = stockDataList.stream().mapToDouble(e -> e.getStockPrice()).average().orElse(0);
+		return Math.round(avg*100)/100;
+	}
+
+	public double getMaxPrice(List<StockData> stockDataList) {
+		return stockDataList.stream().mapToDouble(e -> e.getStockPrice()).max().orElse(0);
+	}
+	
+	public double getMinPrice(List<StockData> stockDataList) {
+		return stockDataList.stream().mapToDouble(e -> e.getStockPrice()).min().orElse(0);
+	}
 }

@@ -1,31 +1,55 @@
-{{ companyData |json}}
 <div class="container">
     <div class="row" *ngIf="companyData not null">
         <div class="col-sm">
             Company Name
-           <h3> Adani Green </h3>
+           <h3> {{companyData.companyName }} </h3>
         </div>
         <div class="col-sm">
             Company CEO
-            <h3>G. Adani</h3>
+            <h3>{{companyData.companyCeo }}</h3>
+        </div>
+        <div class="col-sm">
+            Company Turnover
+            <h3>{{companyData.companyTurnover }} cr.</h3>
         </div>
         <div class="col-sm">
             Stock Exchange
-            <h3>NSE</h3>
+            <h3>{{companyData.stockExchange }}</h3>
         </div>
     </div>
-    <div class="row" style="width: 50%;">
-        <table>
-            <tr *ngIf="stockData not null">
+    <div class="row" >
+        <div class="col">
+        <table class="data-list">
+            <tr *ngIf="stockData.stockDataList not null">
                 <th>Company Code</th>
                 <th>Date</th>
                 <th>Stock Price</th>
             </tr>
-                <tr *ngFor="let data of stockData">
+                <tr *ngFor="let data of stockData.stockDataList">
                     <td>{{ data.companyCode }}</td>
                     <td>{{ data.currentDateAndTime | date:'dd-MM-yyyy'}}</td>
                     <td>{{ data.stockPrice }}</td>
                 </tr>
         </table>
     </div>
+    <div class="col">
+        <table class="stats-list" *ngIf="stockData not null">
+            <tr>
+                <th>Avg price</th>
+                <td>{{stockData.avgOfPrice}}</td>
+            </tr>
+                <tr>
+                    <th>Min price</th>
+                <td>{{stockData.minPrice}}</td>
+                </tr>
+                <tr>
+                    <th>Max price</th>
+                <td>{{stockData.maxPrice}}</td>
+                </tr>
+        </table>
+    </div>
+    </div>
 </div>
+
+
+

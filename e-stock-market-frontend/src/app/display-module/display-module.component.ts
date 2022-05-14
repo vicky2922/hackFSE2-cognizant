@@ -7,8 +7,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class DisplayModuleComponent implements OnInit {
 
-  @Input() stockData: any[] | undefined;
-  @Input() companyData:string='';
+  @Input() stockData: any;
+  @Input() companyData:any;
 
   constructor() { }
   ngOnInit(): void {

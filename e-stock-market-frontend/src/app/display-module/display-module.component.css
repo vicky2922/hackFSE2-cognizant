@@ -1,0 +1,18 @@
+table, th, td{
+    border: 1px solid;
+    padding: 2px;
+    text-align: center;
+}
+table{
+    width: 100%;
+}
+.data-list tr:nth-child(even){
+    background-color: floralwhite;
+}
+.data-list th{
+    background-color: lightsteelblue;
+}
+.stats-list{
+    width: 50%;
+    background-color:lightyellow;
+}

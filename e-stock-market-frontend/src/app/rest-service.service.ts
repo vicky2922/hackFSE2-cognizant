@@ -13,7 +13,8 @@ export class RestServiceService {
   }
 
   public getStockData(companyCode:string, startDate:string, endDate:string){
-    return this.http.get("http://localhost:8989/stock/get/"+companyCode+"/"+startDate+"/"+endDate);
+    //return this.http.get("http://localhost:8989/stock/get/"+companyCode+"/"+startDate+"/"+endDate);
+    return this.http.get("http://localhost:8989/stock/getWithDetail/"+companyCode+"/"+startDate+"/"+endDate);
   }
 
   public getCompanyData(companyCode:string){

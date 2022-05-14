@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.galaxy.stock.Exception.CompanyNotFoundException;
 import com.galaxy.stock.client.RestClient;
 import com.galaxy.stock.model.StockData;
+import com.galaxy.stock.pojo.StockDataWithDetail;
 import com.galaxy.stock.service.StockDataService;
 
 @RestController
@@ -48,6 +49,22 @@ public class StockDataController {
 			throw new CompanyNotFoundException();
 		}
 		return stockDataService.fetchStockData(companyCode, startDate, endDate);
+	}
+	
+	@GetMapping("/getWithDetail/{companyCode}/{startDate}/{endDate}")
+	public StockDataWithDetail fetchStockDataWithDetail(@PathVariable String companyCode, @PathVariable String startDate, @PathVariable String endDate){
+		try {
+			client.getCompany(companyCode);
+		} catch (Exception e) {
+			throw new CompanyNotFoundException();
+		}
+		StockDataWithDetail stockDataWithDetail = new StockDataWithDetail();
+		List<StockData> stockDataList = stockDataService.fetchStockData(companyCode, startDate, endDate);
+		stockDataWithDetail.setStockDataList(stockDataList);
+		stockDataWithDetail.setAvgOfPrice(stockDataService.getAvgPrice(stockDataList));
+		stockDataWithDetail.setMaxPrice(stockDataService.getMaxPrice(stockDataList));
+		stockDataWithDetail.setMinPrice(stockDataService.getMinPrice(stockDataList));
+		return stockDataWithDetail;
 	}
 	
 	@DeleteMapping("/delete/{companyCode}")

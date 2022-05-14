@@ -48,7 +48,7 @@ export class AppComponent {
   fetchCompanyData(companyCode:string){
     let response = this.restService.getCompanyData(companyCode);
     response.subscribe((data)=>{
-      this.companyData=JSON.stringify(data);
+      this.companyData=data;
     });
   }
 
