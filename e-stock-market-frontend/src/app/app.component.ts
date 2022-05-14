@@ -22,6 +22,7 @@ export class AppComponent {
 
   stockDataJson:any;
   stockDataList:any;
+  companyData:any;
 
   receiveMsg($event:any){
     this.searchData=JSON.parse($event);
@@ -29,17 +30,26 @@ export class AppComponent {
     this.endDate=this.searchData['EndDate'];
     this.companyCode=this.searchData['company'];
     this.fetchStockData(this.companyCode, this.startDate, this.endDate);
+    this.fetchCompanyData(this.companyCode);
+    
   //  this.message=$event;
    // this.message2=this.message +' and from app-module too !!';
   }
+  
 
   fetchStockData(companyCode:string, startDate:string, endDate:string){
     let response = this.restService.getStockData(companyCode, startDate, endDate);
     response.subscribe((data)=> {
     //  this.stockDataJson=JSON.stringify(data);
-      this.stockDataList=JSON.stringify(data);
+      this.stockDataList=data;
     });
-    
+  }
+
+  fetchCompanyData(companyCode:string){
+    let response = this.restService.getCompanyData(companyCode);
+    response.subscribe((data)=>{
+      this.companyData=JSON.stringify(data);
+    });
   }
 
 }

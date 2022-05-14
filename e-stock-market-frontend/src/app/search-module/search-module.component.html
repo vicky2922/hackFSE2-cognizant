@@ -1,21 +1,27 @@
 <!-- <button (click)="sendMessage()">Send Message</button> -->
-<div class="container">    
+<div class="container" >    
     <form [formGroup]="form" (ngSubmit)="submit()"> 
-        <div class="form-group">  
-            <label for="company">Company:</label>  
-            <select formControlName="company" class="form-control" style="width: 20%;">  
-                <option disabled>Select Company</option> 
-                <option *ngFor="let company of companyList" [value]="company.companyCode">{{company.companyName}}</option>  
-            </select>  
+        <div class="form-group">
+            <div class="input-class">
+                <label for="company">Company:</label> 
+                <select formControlName="company" class="form-control">  
+                    <option disabled>Select Company</option> 
+                    <option *ngFor="let company of companyList" [value]="company.companyCode">{{company.companyName}}</option>  
+                </select>  
+            </div>
           <!-- <div *ngIf="f.company.touched && f.company.invalid" class="alert alert-danger">  
                 <div *ngIf="f.company.errors.required">Name is required.</div>  
             </div> -->
-            <label for="StartDate">Start date:</label>
-            <input type="date" class="form-control" id="StartDate" name="StartDate" style="width: 20%;"
-            [ngModel]="StartDate | date:'yyyy-MM-dd'"  formControlName="StartDate">
-            <label for="EndDate">End date:</label>
-            <input type="date" class="form-control" id="EndDate" name="EndDate" style="width: 20%;"
-            [ngModel]="EndDate | date:'yyyy-MM-dd'"  formControlName="EndDate">
+            <div class="input-class">
+                <label for="StartDate">Start date:</label>
+                <input type="date" class="form-control" id="StartDate" name="StartDate"
+                [ngModel]="StartDate | date:'yyyy-MM-dd'"  formControlName="StartDate">
+            </div>
+            <div class="input-class">
+                <label for="EndDate">End date:</label>
+                <input type="date" class="form-control" id="EndDate" name="EndDate"
+                [ngModel]="EndDate | date:'yyyy-MM-dd'"  formControlName="EndDate">
+            </div>
         </div>
         <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Submit</button>  
     </form>  

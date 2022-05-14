@@ -1,12 +1,31 @@
-<p>display works!</p>
-{{ childMessage }}
-
-<table>
-    <ng-container *ngFor="let data of childMessage">
-        <tr>
-            <td>
-                <h2>{{data}}</h2>
-            </td>
-        </tr>
-    </ng-container>
-</table>
+{{ companyData |json}}
+<div class="container">
+    <div class="row" *ngIf="companyData not null">
+        <div class="col-sm">
+            Company Name
+           <h3> Adani Green </h3>
+        </div>
+        <div class="col-sm">
+            Company CEO
+            <h3>G. Adani</h3>
+        </div>
+        <div class="col-sm">
+            Stock Exchange
+            <h3>NSE</h3>
+        </div>
+    </div>
+    <div class="row" style="width: 50%;">
+        <table>
+            <tr *ngIf="stockData not null">
+                <th>Company Code</th>
+                <th>Date</th>
+                <th>Stock Price</th>
+            </tr>
+                <tr *ngFor="let data of stockData">
+                    <td>{{ data.companyCode }}</td>
+                    <td>{{ data.currentDateAndTime | date:'dd-MM-yyyy'}}</td>
+                    <td>{{ data.stockPrice }}</td>
+                </tr>
+        </table>
+    </div>
+</div>

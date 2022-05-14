@@ -16,4 +16,8 @@ export class RestServiceService {
     return this.http.get("http://localhost:8989/stock/get/"+companyCode+"/"+startDate+"/"+endDate);
   }
 
+  public getCompanyData(companyCode:string){
+    return this.http.get("http://localhost:8989/company/info/"+companyCode);
+  }
+
 }
