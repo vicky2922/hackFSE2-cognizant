@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.galaxy.stock.Exception.CompanyNotFoundException;
 import com.galaxy.stock.client.RestClient;
+import com.galaxy.stock.kafka.KafkaSender;
 import com.galaxy.stock.model.StockData;
 import com.galaxy.stock.pojo.StockDataWithDetail;
 import com.galaxy.stock.service.StockDataService;
@@ -26,6 +27,9 @@ public class StockDataController {
 	@Autowired
 	RestClient client;
 	
+	@Autowired
+	KafkaSender kafkaSender;
+	
 	@GetMapping("/greetings")
 	public String greetings() {
 		return "Welcome to stock-price micro-service";
@@ -38,7 +42,9 @@ public class StockDataController {
 		} catch (Exception e) {
 			throw new CompanyNotFoundException();
 		}
-		return stockDataService.saveStockPrice(companyCode, stockPrice);
+		StockData stockDataSaved = stockDataService.saveStockPrice(companyCode, stockPrice);
+		kafkaSender.send(stockDataSaved.toString());
+		return stockDataSaved;
 	}
 	
 	@GetMapping("/get/{companyCode}/{startDate}/{endDate}")

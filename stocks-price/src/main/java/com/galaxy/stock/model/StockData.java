@@ -49,5 +49,10 @@ public class StockData {
 		this.stockPrice = stockPrice;
 		this.currentDateAndTime = currentDateAndTime;
 	}
+	@Override
+	public String toString() {
+		return "StockData [id=" + id + ", companyCode=" + companyCode + ", stockPrice=" + stockPrice
+				+ ", currentDateAndTime=" + currentDateAndTime + "]";
+	}
 	
 }
