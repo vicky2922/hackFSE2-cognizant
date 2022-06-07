@@ -1,10 +1,12 @@
 package com.galaxy.registry.controller;
 
+import java.net.URI;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +32,9 @@ public class CompanyRegistryController {
 	
 	@Autowired
 	RestClient client;
+	
+	@Value("${restclient.stockprice.url}")
+	String stockPriceUrl;
 		
 	@GetMapping("/greetings")
 	public String greetings() {
@@ -69,7 +74,8 @@ public class CompanyRegistryController {
 		if(null == companyRegistry) {
 			throw new CompanyNotFoundException();
 		}
-		client.deleteStockData(companyCode);
+		URI determinedBasePathUri = URI.create(stockPriceUrl);
+		client.deleteStockData(determinedBasePathUri,companyCode);
 		companyRegistryService.deleteCompany(companyCode);
 		return "Company deleted with company code \""+companyCode+"\".";
 	}

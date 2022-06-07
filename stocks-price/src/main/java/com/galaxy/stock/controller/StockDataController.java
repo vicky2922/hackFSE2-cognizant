@@ -1,8 +1,10 @@
 package com.galaxy.stock.controller;
 
+import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +32,9 @@ public class StockDataController {
 	@Autowired
 	KafkaSender kafkaSender;
 	
+	@Value("${restclient.companyregistry.url}")
+	String companyRegistryUrl;
+	
 	@GetMapping("/greetings")
 	public String greetings() {
 		return "Welcome to stock-price micro-service";
@@ -38,7 +43,8 @@ public class StockDataController {
 	@PostMapping("/add/{companyCode}/{stockPrice}")
 	public StockData saveStockPrice(@PathVariable String companyCode, @PathVariable double stockPrice) {
 		try {
-			client.getCompany(companyCode);
+			URI determinedBasePathUri = URI.create(companyRegistryUrl);
+			client.getCompany(determinedBasePathUri, companyCode);
 		} catch (Exception e) {
 			throw new CompanyNotFoundException();
 		}
@@ -50,7 +56,8 @@ public class StockDataController {
 	@GetMapping("/get/{companyCode}/{startDate}/{endDate}")
 	public List<StockData> fetchStockData(@PathVariable String companyCode, @PathVariable String startDate, @PathVariable String endDate){
 		try {
-			client.getCompany(companyCode);
+			URI determinedBasePathUri = URI.create(companyRegistryUrl);
+			client.getCompany(determinedBasePathUri, companyCode);
 		} catch (Exception e) {
 			throw new CompanyNotFoundException();
 		}
@@ -60,7 +67,8 @@ public class StockDataController {
 	@GetMapping("/getWithDetail/{companyCode}/{startDate}/{endDate}")
 	public StockDataWithDetail fetchStockDataWithDetail(@PathVariable String companyCode, @PathVariable String startDate, @PathVariable String endDate){
 		try {
-			client.getCompany(companyCode);
+			URI determinedBasePathUri = URI.create(companyRegistryUrl);
+			client.getCompany(determinedBasePathUri, companyCode);
 		} catch (Exception e) {
 			throw new CompanyNotFoundException();
 		}
