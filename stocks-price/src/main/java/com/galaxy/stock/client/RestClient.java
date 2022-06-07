@@ -6,7 +6,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.galaxy.stock.pojo.CompanyData;
 
-@FeignClient(value="company-client", url="http://hackfse2apigateway-env.eba-mpsgx5wq.us-west-2.elasticbeanstalk.com/company/")
+//@FeignClient(value="company-client", url="http://hackfse2apigateway-env.eba-mpsgx5wq.us-west-2.elasticbeanstalk.com/company/")
+@FeignClient(value="company-client", url="http://localhost:8989/company/")
 public interface RestClient {
 
 	@GetMapping("/info/{companyCode}")
